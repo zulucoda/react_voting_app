@@ -7,13 +7,16 @@
     "e2e": "nightwatch",
     "test": "./node_modules/.bin/concurrently -k 'npm run server' 'npm run e2e'",
     "start": "npm run server",
-    "server": "http-server . -p 3000"
+    "server": "http-server . -p 3000",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "private": true,
   "dependencies": {
     "http-server": "0.9.0"
   },
   "devDependencies": {
-    "concurrently": "2.2.0"
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "concurrently": "2.2.0",
+    "flow-bin": "^0.38.0"
   }
 }

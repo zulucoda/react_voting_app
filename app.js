@@ -1,3 +1,6 @@
+// @flow
+
+
 const ProductList = React.createClass({
 
   render : function () {
