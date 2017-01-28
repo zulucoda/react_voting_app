@@ -27,6 +27,16 @@ const ProductList = React.createClass({
     this.updateState();
   },
 
+  handleProductDownVote: function (productId) {
+    Data.forEach((item) => {
+      if(item.id === productId) {
+        item.downVotes +=1;
+        return;
+      }
+    });
+    this.updateState();
+  },
+
   render : function () {
     const products = this.state.products.map((product) => {
       return (
@@ -40,7 +50,9 @@ const ProductList = React.createClass({
             votes={product.votes}
             submitter_avatar_url={product.submitter_avatar_url}
             product_image_url={product.product_image_url}
+            downVotes={product.downVotes}
             onVote={this.handleProductUpVote}
+            onDownVote={this.handleProductDownVote}
           />
         </div>
       );
@@ -61,6 +73,10 @@ const Product = React.createClass({
     this.props.onVote(this.props.id);
   },
 
+  handleDownVote: function () {
+    this.props.onDownVote(this.props.id);
+  },
+
   render: function () {
     return (
       <div className="item">
@@ -73,6 +89,10 @@ const Product = React.createClass({
               <i className="large caret up icon">
               </i>
               {this.props.votes}
+            </a>
+            <a>
+              <i onClick={this.handleDownVote} className="large caret down icon"></i>
+              {this.props.downVotes}
             </a>
           </div>
           <div className="description">
